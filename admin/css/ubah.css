@@ -1,0 +1,43 @@
+ body {
+            background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        .navbar {
+            border-radius: 0 0 18px 18px;
+            background: linear-gradient(90deg, #007bff 60%, #6bc1ff 100%);
+            box-shadow: 0 4px 24px rgba(0, 123, 255, 0.08);
+        }
+
+        .navbar-brand {
+            font-size: 1.7rem;
+            letter-spacing: 1px;
+        }
+
+        .card-login {
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            background: rgba(255, 255, 255, 0.97);
+            border: none;
+            padding: 2.5rem;
+            min-width: 340px;
+            max-width: 420px;
+        }
+
+        .card-title {
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #007bff;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: -20px;
+            width: calc(100% - 40px);
+            text-align: center;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
