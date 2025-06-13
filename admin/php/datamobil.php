@@ -49,10 +49,16 @@ $data_mobil = select("SELECT * FROM datamobil ORDER BY id DESC");
                             <i class="bi bi-cash-coin me-1"></i>Admin Setting
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.php">
+                         <i class="bi bi-graph-up-arrow me-2"></i>Dashboard  
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
+
     <div class="container mt-5">
         <div class="card shadow-lg">
             <div class="card-header text-white">

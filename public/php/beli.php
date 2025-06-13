@@ -1,3 +1,13 @@
+<?php include '../../admin/php/database.php' ?>
+<?php
+if (isset($_POST['mobil'])) {
+    if (create_pembeli($_POST) > 0) {
+        echo "<script>alert('data mobil berhasil ditambahkan.'); </script>";
+    } else {
+        echo "<script>alert('data mobil gagal ditambahkan.'); </script>";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -6,7 +16,7 @@
     <title>Beranda - Dealer Mobil</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
-    <link rel ="stylesheet" href="../css/beli.css">
+    <link rel="stylesheet" href="../css/beli.css">
 </head>
 
 <body>
@@ -20,6 +30,7 @@
                 <li><a href="home.php">Beranda</a></li>
                 <li><a href="mobil.php">Mobil</a></li>
                 <li><a href="beli.php" class="active">Beli</a></li>
+                <li><a href="../../index.php">Logout</a></li>
             </ul>
         </div>
     </nav>
@@ -31,24 +42,24 @@
             <h2 class="order-form-title">Pesan Mobil Impianmu!</h2>
             <p class="order-form-subtitle">Isi data berikut untuk melakukan pemesanan mobil baru dengan mudah dan cepat.</p>
         </div>
-        <form action="proses_pemesanan.php" method="post" class="order-form">
+        <form  method="post" class="order-form">
             <div class="form-group">
-                <label for="merek">Merek Mobil</label>
-                <input type="text" id="merek" name="merek" required placeholder="Contoh: Toyota">
+                <label for="nama">Nama</label>
+                <input type="text" id="nama" name="nama" required placeholder="Contoh: Budi Santoso">
             </div>
             <div class="form-group">
-                <label for="jenis">Jenis Mobil</label>
-                <input type="text" id="jenis" name="jenis" required placeholder="Contoh: SUV">
+                <label for="kontak">Kontak</label>
+                <input type="text" id="kontak" name="kontak" required placeholder="Contoh: 08123456789">
             </div>
             <div class="form-group">
-                <label for="tahun">Tahun</label>
-                <input type="number" id="tahun" name="tahun" min="1990" max="2099" required placeholder="Contoh: 2023">
+                <label for="alamat">Alamat</label>
+                <input type="text" id="alamat" name="alamat" required placeholder="Contoh: Jl. Mawar No. 10, Jakarta">
             </div>
             <div class="form-group">
-                <label for="harga">Harga (Rp)</label>
-                <input type="number" id="harga" name="harga" min="0" required placeholder="Contoh: 250000000">
+                <label for="jenis_mobil">Jenis Mobil</label>
+                <input type="text" id="jenis_mobil" name="jenis_mobil" required placeholder="Contoh: Toyota Avanza">
             </div>
-            <button type="submit" class="order-btn">
+            <button type="submit" class="order-btn" name="mobil">
                 <span>🚗</span> Pesan Sekarang
             </button>
         </form>

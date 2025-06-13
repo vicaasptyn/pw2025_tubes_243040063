@@ -52,6 +52,11 @@ $flash = '';
                             <i class="bi bi-cash-coin me-1"></i>Admin Setting
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.php">
+                         <i class="bi bi-graph-up-arrow me-2"></i>Dashboard  
+                        </a>
+                    </li>
                 </ul> 
             </div>
         </div>
@@ -66,11 +71,8 @@ $flash = '';
                 <div class="mb-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
                     <span class="fw-semibold text-secondary">
                         <i class="bi bi-info-circle me-1"></i>
-                        Halaman ini menampilkan daftar admin yang terdaftar. Anda dapat menambah, mengubah, atau menghapus data admin sesuai kebutuhan.
+                        Halaman ini menampilkan daftar admin yang terdaftar. Anda dapat mengubah da menghapus data admin sesuai kebutuhan.
                     </span>
-                    <a href="tambah_mobil.php" class="btn btn-primary px-4 add-btn">
-                        <i class="bi bi-plus-circle me-1"></i>Tambah User
-                    </a>
                 </div>
                 <div class="table-responsive">
                 <table class="table table-hover table-striped align-middle" id="table" class="table table-striped">

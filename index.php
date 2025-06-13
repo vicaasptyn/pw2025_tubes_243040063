@@ -1,14 +1,57 @@
 <?php
+session_start();
+include './admin/php/database.php';
 
-if (isset($_POST["login"])) {
-    if ($_POST["username"] == "cici" && $_POST["password"] == "cican") {
-        header("Location: ./admin/php/datamobil.php ");
-        exit;
-    } else {
-        $error = true;
-    }
+// Jika login sebagai admin
+if (isset($_POST["nama"]) && isset($_POST["password"]) && $_POST["nama"] == "admin" && $_POST["password"] == "admin123") {
+    $_SESSION['login'] = true;
+    $_SESSION['nama'] = "admin";
+    header("Location: ./admin/php/dashboard.php");
+    exit;
 }
 
+$error = ""; // Inisialisasi variabel error
+
+// Cek apakah tombol login ditekan
+if (isset($_POST['login'])) {
+    global $db;
+
+    // Pastikan koneksi database tersedia
+    if (!$db) {
+        die("Koneksi database gagal: " . mysqli_connect_error());
+    }
+
+    // Ambil input username dan password dengan sanitasi
+    $nama = mysqli_real_escape_string($db, $_POST['nama']);
+    $password = mysqli_real_escape_string($db, $_POST['password']);
+
+    // Cek username di database
+    $result = mysqli_query($db, "SELECT * FROM pendaftaran WHERE nama = '$nama'");
+
+    if (!$result) {
+        die("Query gagal: " . mysqli_error($db));
+    }
+
+    // Jika username ditemukan
+    if (mysqli_num_rows($result) == 1) {
+        $data = mysqli_fetch_assoc($result);
+
+        if ($password === $data['password']) {
+            // Set session (tanpa menyimpan password)
+            $_SESSION['id'] = $data['id'];
+            $_SESSION['nama'] = $data['nama'];
+            $_SESSION['email'] = $data['email'];
+
+            // Redirect ke halaman utama
+            header("Location: ./public/php/home.php");
+            exit();
+        } else {
+            $error = "Password salah!";
+        }
+    } else {
+        $error = "Username tidak ditemukan!";
+    }
+}
 ?>
 
 <!doctype html>
@@ -231,9 +274,7 @@ if (isset($_POST["login"])) {
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-
-            </div>
+            <div class="collapse navbar-collapse" id="navbarNav"></div>
         </div>
     </nav>
     <!-- akhir navbar -->
@@ -244,15 +285,15 @@ if (isset($_POST["login"])) {
             <div class="card-body">
                 <h5 class="card-title text-center mb-4">Login ke Akun Anda</h5>
                 <!-- Tempat pesan error/sukses -->
-                <?php if (isset($error)) : ?>
-                    <div class="alert alert-danger">Username atau password salah!</div>
+                <?php if (!empty($error)) : ?>
+                    <div class="alert alert-danger"><?= $error ?></div>
                 <?php endif; ?>
                 <form action="" method="post">
                     <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
+                        <label for="nama" class="form-label">Nama</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan username" required>
+                            <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama" required>
                         </div>
                     </div>
                     <div class="mb-3">
@@ -262,10 +303,12 @@ if (isset($_POST["login"])) {
                             <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password" required>
                         </div>
                     </div>
-                    <button type="submit" name="login" class="btn btn-primary w-100 mt-2"><i class="bi bi-box-arrow-in-right me-1"></i>Login</button>
+                    <button type="submit" name="login" class="btn btn-primary w-100 mt-2">
+                        <i class="bi bi-box-arrow-in-right me-1"></i>Login
+                    </button>
                 </form>
                 <div class="login-footer mt-3">
-                    Belum punya akun? <a href="#">Daftar</a>
+                    Belum punya akun? <a href="pendaftaran.php">Daftar</a>
                 </div>
             </div>
         </div>

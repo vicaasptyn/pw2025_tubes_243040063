@@ -15,14 +15,14 @@ if (isset($_POST['mobil'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login admin</title>
+    <title>Tambah Mobil</title>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/login.css">
 </head>
 <style>
     body {
-        background-image: url('../../img/bg.jpg');
+        background: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%);
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
@@ -30,12 +30,15 @@ if (isset($_POST['mobil'])) {
     }
 
     .card {
-        background-color: rgba(246, 244, 239, 0.9);
-        box-shadow: 0 0 20px rgba(88, 114, 82, 0.3);
+        background-color: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 0 20px rgba(33, 147, 176, 0.3);
+        border: 2px solid #2193b0;
+        border-radius: 18px;
     }
 
     .card:hover {
-        box-shadow: 0 0 0 7px rgba(153, 255, 130, 0.9);
+        box-shadow: 0 0 0 7px rgba(33, 147, 176, 0.15);
+        border-color: #6dd5ed;
     }
 
     .logo {
@@ -45,14 +48,48 @@ if (isset($_POST['mobil'])) {
         width: 100px;
         border-radius: 50%;
         object-fit: cover;
-        box-shadow: 1px 1px 12px rgba(88, 114, 82, 0.9);
+        box-shadow: 1px 1px 12px rgba(33, 147, 176, 0.5);
+        border: 3px solid #2193b0;
+    }
+
+    .form-label {
+        color: #2193b0;
+        font-weight: 600;
+    }
+
+    .form-control:focus {
+        border-color: #2193b0;
+        box-shadow: 0 0 0 2px #6dd5ed55;
+    }
+
+    .btn-success {
+        background: linear-gradient(90deg, #2193b0 0%, #6dd5ed 100%);
+        border: none;
+        color: #fff;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+
+    .btn-success:hover {
+        background: linear-gradient(90deg, #6dd5ed 0%, #2193b0 100%);
+        color: #fff;
+    }
+
+    .pendaftarn a {
+        color: #2193b0;
+        text-decoration: underline;
+        font-weight: 600;
+    }
+
+    .pendaftarn a:hover {
+        color: #17627a;
     }
 </style>
 
 <body class="container d-flex align-items-center justify-content-center" style="min-height:100vh;">
 
     <div class="card p-4 shadow" style="width: 500px;" data-aos="zoom-in">
-        <h3 class="mb-4 text-center">Tambah Mobil</h3>
+        <h3 class="mb-4 text-center" style="color:#2193b0;">Tambah Mobil</h3>
         <form method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="merek" class="form-label">Merek</label>
@@ -72,7 +109,7 @@ if (isset($_POST['mobil'])) {
             </div>
             <div class="mb-3">
                 <label for="foto" class="form-label">Foto</label>
-                <input id="foto" name="foto" required type="file" class="form-control" accept="image/*" onchange="priviewImage(event)" />
+                <input id="foto" name="foto" required type="file" class="form-control" accept="image/*" />
             </div>
             <div class="mb-3">
                 <label for="status_ketersediaan" class="form-label">Status Ketersediaan</label>
@@ -85,11 +122,6 @@ if (isset($_POST['mobil'])) {
             <button class="btn btn-success w-100" type="submit" name="mobil">Submit</button>
         </form>
         <hr>
-        <div class="pendaftarn text-center">
-            <p>Sudah punya akun?
-                <a href="index.php">Login</a>
-            </p>
-        </div>
     </div>
 </body>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

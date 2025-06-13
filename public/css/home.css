@@ -7,7 +7,7 @@
         }
 
         nav {
-            background: #fff;
+            background: #2c84ff;
             box-shadow: 0 2px 8px #0001;
             padding: 0;
         }
@@ -48,7 +48,7 @@
         .navbar-menu li a:hover,
         .navbar-menu li a.active {
             background: #005bea;
-            color: #fff;
+            color: #1a4fff;
         }
 
         .banner {

@@ -52,6 +52,11 @@ $flash = '';
                             <i class="bi bi-cash-coin me-1"></i>Admin Setting
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.php">
+                         <i class="bi bi-graph-up-arrow me-2"></i>Dashboard  
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -80,7 +85,7 @@ $flash = '';
                                 <th scope="col" style="width: 20%;">Nama</th>
                                 <th scope="col" style="width: 20%;">Kontak</th>
                                 <th scope="col" style="width: 15%;">Alamat</th>
-                                <th scope="col" style="width: 20%;">Registrasi</th>
+                                <th scope="col" style="width: 20%;">Jenis Mobil</th>
                                 <th scope="col" style="width: 20%;">Aksi</th>
                             </tr>
                         </thead>
@@ -93,7 +98,7 @@ $flash = '';
                                         <td><?= htmlspecialchars($data['nama']); ?></td>
                                         <td><?= htmlspecialchars($data['kontak']); ?></td>
                                         <td><?= htmlspecialchars($data['alamat']); ?></td>
-                                        <td><?= $data['registrasi']; ?></td>
+                                        <td><?= $data['jenis_mobil']; ?></td>
                                         <td class="text-center">
                                             <a href="ubah/ubah_pembeli.php?id=<?= $data['id']; ?>" class="btn btn-success btn-sm me-1" title="Ubah">
                                                 <i class="bi bi-pencil-square icon-action"></i>

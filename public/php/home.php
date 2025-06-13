@@ -1,4 +1,5 @@
 <?php
+session_start();
 // home.php
 
 $featuredCars = [
@@ -69,6 +70,7 @@ $promos = [
                 <li><a href="home.php" class="active">Beranda</a></li>
                 <li><a href="mobil.php">Mobil</a></li>
                 <li><a href="beli.php">Beli</a></li>
+                <li><a href="../../index.php">Logout</a></li>
             </ul>
         </div>
     </nav>
@@ -87,25 +89,7 @@ $promos = [
     </div>
 
     <div class="container">
-        <!-- Pencarian & Filter -->
-        <form class="search-filter" method="GET" action="">
-            <input type="text" name="q" placeholder="Cari mobil (misal: Toyota, Hyundai)">
-            <select name="tipe">
-                <option value="">Tipe Mobil</option>
-                <option value="supercar">SuperCar</option>
-                <option value="suv">SUV</option>
-                <option value="hatchback">Hatchback</option>
-            </select>
-            <select name="harga">
-                <option value="">Harga</option>
-                <option value="1">&lt; Rp 255jt</option>
-                <option value="2">Rp 300jt - Rp 750jt</option>
-                <option value="3">&gt; Rp 750jt - 2,1 M</option>
-            </select>
-            <button type="submit">Cari</button>
-        </form>
-
-        <!-- Daftar Mobil Unggulan -->
+ <!-- Daftar Mobil Unggulan -->
         <section id="cars">
             <div class="section-title">Mobil Unggulan</div>
             <div class="cars">

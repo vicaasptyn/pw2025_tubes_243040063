@@ -31,19 +31,20 @@ if (isset($_POST['ubah'])) {
     <link rel="stylesheet" href="../../css/ubah.css">
     <style>
         body {
-            background: linear-gradient(120deg, #e0f7fa 0%, #f8fafc 100%);
+            background: linear-gradient(120deg, #2193b0 0%, #6dd5ed 100%);
             min-height: 100vh;
         }
 
         .card-detail {
-            background: #fff;
+            background: #f8fafc;
             border-radius: 1.5rem;
-            box-shadow: 0 8px 32px rgba(60, 60, 60, 0.08);
+            box-shadow: 0 8px 32px rgba(33, 147, 176, 0.12);
             padding: 2.5rem 2rem;
+            border: 2px solid #2193b0;
         }
 
         .badge-custom {
-            background: linear-gradient(90deg, #00b894 60%, #00cec9 100%);
+            background: linear-gradient(90deg, #2193b0 60%, #6dd5ed 100%);
             color: #fff;
         }
 
@@ -52,13 +53,40 @@ if (isset($_POST['ubah'])) {
             padding: 1rem 0;
             background: transparent;
             font-size: 1rem;
-            color: #888;
+            color: #2193b0;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, #2193b0 60%, #6dd5ed 100%) !important;
+        }
+
+        .navbar-brand, .nav-link, .navbar-dark .navbar-nav .nav-link.active {
+            color: #fff !important;
+        }
+
+        .btn-outline-success {
+            border-color: #2193b0;
+            color: #2193b0;
+        }
+
+        .btn-outline-success:hover, .btn-outline-success:focus {
+            background: #2193b0;
+            color: #fff;
+            border-color: #2193b0;
+        }
+
+        .text-success {
+            color: #2193b0 !important;
+        }
+
+        .table th.text-secondary {
+            color: #2193b0 !important;
         }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm py-3" style="background: #00b894;">
+    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm py-3">
         <div class="container">
             <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="#">
                 <i class="bi bi-car-front-fill fs-3"></i>

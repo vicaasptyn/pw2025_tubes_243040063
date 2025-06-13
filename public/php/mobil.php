@@ -1,16 +1,229 @@
+<?php
+include '../../admin/php/database.php'; 
+$mobil = select("SELECT * FROM datamobil");
+?>
+
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
     <title>Beranda - Dealer Mobil</title>
-    <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/mobil.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <style>
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+            margin: 0;
+            min-height: 100vh;
+        }
+        nav {
+            background: linear-gradient(90deg, #005bea 70%, #00c6fb 100%);
+            box-shadow: 0 2px 16px #005bea22;
+            padding: 0;
+        }
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 24px;
+        }
+        .navbar-brand {
+            font-size: 1.7em;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .navbar-brand::before {
+            content: "\1F697";
+            font-size: 1.2em;
+            margin-right: 8px;
+        }
+        .navbar-menu {
+            list-style: none;
+            display: flex;
+            gap: 28px;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar-menu li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 18px;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .navbar-menu li a.active,
+        .navbar-menu li a:hover {
+            background:rgb(149, 202, 255);
+            color: #005bea;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto 0 auto;
+            padding: 0 20px;
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px #005bea22;
+            padding: 12px 20px;
+            margin-bottom: 36px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .search-container i {
+            color: #005bea;
+            font-size: 1.2em;
+            margin-right: 10px;
+        }
+        .search-input {
+            border: none;
+            outline: none;
+            font-size: 1em;
+            width: 100%;
+            background: transparent;
+        }
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            justify-content: center;
+        }
+        .col {
+            flex: 1 1 220px;
+            max-width: 260px;
+            min-width: 220px;
+            display: flex;
+        }
+        .card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px #005bea22;
+            overflow: hidden;
+            transition: transform 0.18s, box-shadow 0.18s;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        .card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 8px 32px #005bea44;
+        }
+        .card-img-top {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            background: #e3e3e3;
+            transition: filter 0.2s;
+        }
+        .card:hover .card-img-top {
+            filter: brightness(0.95) saturate(1.2);
+        }
+        .card-body {
+            padding: 18px 14px 20px 14px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .card-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #005bea;
+            margin-bottom: 8px;
+        }
+        .card-text {
+            font-size: 1em;
+            color: #444;
+            margin: 2px 0;
+        }
+        .price {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #00a859;
+            margin-top: 8px;
+        }
+        /* Footer */
+        footer {
+            background: linear-gradient(90deg, #005bea 70%, #00c6fb 100%);
+            color: #fff;
+            padding: 40px 0 20px 0;
+            margin-top: 70px;
+            box-shadow: 0 -2px 24px #005bea33;
+            border-radius: 24px 24px 0 0;
+        }
+        .footer-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 32px;
+        }
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+        }
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-section ul li a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 4px 0;
+            transition: color 0.2s;
+        }
+        .footer-section ul li a:hover {
+            color: #ffeb3b;
+        }
+        .footer-section .footer-title {
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        .footer-section .footer-contact a {
+            color: #fff;
+            text-decoration: underline;
+        }
+        .footer-section .footer-social a {
+            color: #fff;
+            margin-right: 12px;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.2s;
+        }
+        .footer-section .footer-social a:hover {
+            color: #ffeb3b;
+        }
+        @media (max-width: 900px) {
+            .row { gap: 18px; }
+            .col { max-width: 48%; }
+            .footer-container { flex-direction: column; gap: 18px; }
+        }
+        @media (max-width: 600px) {
+            .navbar-container { flex-direction: column; gap: 10px; }
+            .row { gap: 12px; }
+            .col { max-width: 100%; }
+            .container { padding: 0 8px; }
+        }
+    </style>
 </head>
-
 <body>
-
     <!-- Navbar -->
     <nav>
         <div class="navbar-container">
@@ -21,260 +234,81 @@
                 <li><a href="home.php">Beranda</a></li>
                 <li><a href="mobil.php" class="active">Mobil</a></li>
                 <li><a href="beli.php">Beli</a></li>
+                <li><a href="../../index.php">Logout</a></li>
             </ul>
         </div>
     </nav>
-    <div style="max-width:1100px;margin:40px auto 0;padding:0 20px;">
-        <h2>Daftar Mobil</h2>
-        <form method="get" style="margin-bottom:30px;display:flex;gap:15px;flex-wrap:wrap;">
-            <input type="text" name="q" placeholder="Cari nama mobil..." value="<?= htmlspecialchars($_GET['q'] ?? '') ?>" style="padding:8px 12px;border:1px solid #ccc;border-radius:4px;">
-            <select name="kategori" style="padding:8px 12px;border:1px solid #ccc;border-radius:4px;">
-                <option value="">Semua Kategori</option>
-                <option value="SUV" <?= (($_GET['kategori'] ?? '') == 'SUV') ? 'selected' : ''; ?>>SUV</option>
-                <option value="Sedan" <?= (($_GET['kategori'] ?? '') == 'Sedan') ? 'selected' : ''; ?>>Sedan</option>
-                <option value="Hatchback" <?= (($_GET['kategori'] ?? '') == 'Hatchback') ? 'selected' : ''; ?>>Hatchback</option>
-                <option value="MPV" <?= (($_GET['kategori'] ?? '') == 'MPV') ? 'selected' : ''; ?>>MPV</option>
-            </select>
-            <button type="submit" style="background:#005bea;color:#fff;border:none;padding:8px 18px;border-radius:4px;cursor:pointer;">Filter</button>
-        </form>
-        <?php
-        // Contoh data mobil
-        $mobil = [
-            [
-                'nama' => 'Toyota Avanza',
-                'kategori' => 'MPV',
-                'harga' => 230000000,
-                'gambar' => '../img/avanza.jpg',
-                'deskripsi' => 'MPV keluarga yang irit dan nyaman, cocok untuk perjalanan jauh.'
-            ],
-            [
-                'nama' => 'Honda HR-V',
-                'kategori' => 'SUV',
-                'harga' => 375000000,
-                'gambar' => '../img/hrv.jpg',
-                'deskripsi' => 'SUV stylish dengan fitur modern dan performa tangguh.'
-            ],
-            [
-                'nama' => 'Suzuki Swift',
-                'kategori' => 'Hatchback',
-                'harga' => 210000000,
-                'gambar' => '../img/swift.jpg',
-                'deskripsi' => 'Hatchback kompak, lincah di perkotaan dan hemat bahan bakar.'
-            ],
-            [
-                'nama' => 'Toyota Camry',
-                'kategori' => 'Sedan',
-                'harga' => 650000000,
-                'gambar' => '../img/camry.jpg',
-                'deskripsi' => 'Sedan premium dengan kenyamanan dan kemewahan kelas atas.'
-            ],
-            [
-                'nama' => 'Mitsubishi Xpander',
-                'kategori' => 'MPV',
-                'harga' => 270000000,
-                'gambar' => '../img/xpander.jpg',
-                'deskripsi' => 'MPV modern dengan kabin luas dan fitur keselamatan lengkap.'
-            ],
-            [
-                'nama' => 'Daihatsu Terios',
-                'kategori' => 'SUV',
-                'harga' => 250000000,
-                'gambar' => '../img/terios.jpg',
-                'deskripsi' => 'SUV tangguh, cocok untuk petualangan keluarga di segala medan.'
-            ],
-            [
-                'nama' => 'Honda Brio',
-                'kategori' => 'Hatchback',
-                'harga' => 180000000,
-                'gambar' => '../img/brio.jpg',
-                'deskripsi' => 'Hatchback mungil, irit bahan bakar dan mudah diparkir.'
-            ],
-            [
-                'nama' => 'Hyundai Ioniq 5',
-                'kategori' => 'SUV',
-                'harga' => 800000000,
-                'gambar' => '../img/ioniq5.jpg',
-                'deskripsi' => 'SUV listrik futuristik dengan teknologi canggih dan ramah lingkungan.'
-            ],
-            [
-                'nama' => 'Toyota Yaris',
-                'kategori' => 'Hatchback',
-                'harga' => 270000000,
-                'gambar' => '../img/yaris.jpg',
-                'deskripsi' => 'Hatchback stylish, cocok untuk anak muda dan keluarga kecil.'
-            ],
-            [
-                'nama' => 'Honda Civic',
-                'kategori' => 'Sedan',
-                'harga' => 550000000,
-                'gambar' => '../img/civic.jpg',
-                'deskripsi' => 'Sedan sporty dengan performa responsif dan desain elegan.'
-            ],
-            [
-                'nama' => 'Suzuki Ertiga',
-                'kategori' => 'MPV',
-                'harga' => 220000000,
-                'gambar' => '../img/ertiga.jpg',
-                'deskripsi' => 'MPV ekonomis, nyaman untuk keluarga dan irit perawatan.'
-            ],
-            [
-                'nama' => 'Mazda CX-5',
-                'kategori' => 'SUV',
-                'harga' => 550000000,
-                'gambar' => '../img/mazdacx5.jpg',
-                'deskripsi' => 'SUV premium dengan desain elegan dan fitur keselamatan mutakhir.'
-            ],
-            [
-                'nama' => 'Nissan Livina',
-                'kategori' => 'MPV',
-                'harga' => 240000000,
-                'gambar' => '../img/livina.jpg',
-                'deskripsi' => 'MPV nyaman dengan kabin luas dan konsumsi bahan bakar efisien.'
-            ],
-            [
-                'nama' => 'Wuling Almaz',
-                'kategori' => 'SUV',
-                'harga' => 320000000,
-                'gambar' => '../img/almaz.jpg',
-                'deskripsi' => 'SUV modern dengan fitur voice command dan panoramic sunroof.'
-            ],
-            [
-                'nama' => 'Daihatsu Sigra',
-                'kategori' => 'MPV',
-                'harga' => 150000000,
-                'gambar' => '../img/sigra.jpg',
-                'deskripsi' => 'MPV murah meriah, cocok untuk keluarga muda.'
-            ],
-            [
-                'nama' => 'Toyota Fortuner',
-                'kategori' => 'SUV',
-                'harga' => 550000000,
-                'gambar' => '../img/fortuner.jpg',
-                'deskripsi' => 'SUV besar dengan performa tangguh dan tampilan gagah.'
-            ],
-            [
-                'nama' => 'Honda Jazz',
-                'kategori' => 'Hatchback',
-                'harga' => 250000000,
-                'gambar' => '../img/jazz.jpg',
-                'deskripsi' => 'Hatchback favorit anak muda, lincah dan stylish.'
-            ],
-            [
-                'nama' => 'Toyota Vios',
-                'kategori' => 'Sedan',
-                'harga' => 320000000,
-                'gambar' => '../img/vios.jpg',
-                'deskripsi' => 'Sedan ekonomis, nyaman untuk perjalanan harian.'
-            ],
-            [
-                'nama' => 'Mitsubishi Pajero Sport',
-                'kategori' => 'SUV',
-                'harga' => 600000000,
-                'gambar' => '../img/pajero.jpg',
-                'deskripsi' => 'SUV premium dengan performa offroad dan kenyamanan maksimal.'
-            ],
-            [
-                'nama' => 'Suzuki Baleno',
-                'kategori' => 'Hatchback',
-                'harga' => 230000000,
-                'gambar' => '../img/baleno.jpg',
-                'deskripsi' => 'Hatchback modern dengan fitur lengkap dan desain elegan.'
-            ],
-            [
-                'nama' => 'Honda Accord',
-                'kategori' => 'Sedan',
-                'harga' => 720000000,
-                'gambar' => '../img/accord.jpg',
-                'deskripsi' => 'Sedan mewah dengan teknologi canggih dan kenyamanan tinggi.'
-            ],
-            [
-                'nama' => 'Toyota Sienta',
-                'kategori' => 'MPV',
-                'harga' => 300000000,
-                'gambar' => '../img/sienta.jpg',
-                'deskripsi' => 'MPV unik dengan pintu geser dan kabin fleksibel.'
-            ],
-            [
-                'nama' => 'Hyundai Stargazer',
-                'kategori' => 'MPV',
-                'harga' => 250000000,
-                'gambar' => '../img/stargazer.jpg',
-                'deskripsi' => 'MPV terbaru dengan fitur kekinian dan desain futuristik.'
-            ],
-            [
-                'nama' => 'Mazda 2',
-                'kategori' => 'Hatchback',
-                'harga' => 280000000,
-                'gambar' => '../img/mazda2.jpg',
-                'deskripsi' => 'Hatchback premium dengan handling mantap dan interior mewah.'
-            ],
-        ];
+    <!-- Search -->
+    <div class="container">
+      <div class="search-container">
+        <i class="fa fa-search"></i>
+      </div>
 
-        // Filter pencarian
-        $q = strtolower(trim($_GET['q'] ?? ''));
-        $kategori = $_GET['kategori'] ?? '';
-
-        $filtered = array_filter($mobil, function ($m) use ($q, $kategori) {
-            $match = true;
-            if ($q) {
-                $match = $match && (strpos(strtolower($m['nama']), $q) !== false);
-            }
-            if ($kategori) {
-                $match = $match && ($m['kategori'] === $kategori);
-            }
-            return $match;
-        });
-
-        if (empty($filtered)) {
-            echo "<p>Tidak ada mobil yang ditemukan.</p>";
-        } else {
-            echo '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:28px;">';
-            foreach ($filtered as $m) {
-                echo '<div style="border:1px solid #eee;border-radius:8px;overflow:hidden;background:#fafbfc;box-shadow:0 2px 8px #0001;">';
-                echo '<img src="' . htmlspecialchars($m['gambar']) . '" alt="' . htmlspecialchars($m['nama']) . '" style="width:100%;height:160px;object-fit:cover;">';
-                echo '<div style="padding:16px;">';
-                echo '<h3 style="margin:0 0 8px 0;font-size:1.15em;color:#005bea;">' . htmlspecialchars($m['nama']) . '</h3>';
-                echo '<span style="display:inline-block;background:#e3f0ff;color:#005bea;padding:2px 10px;border-radius:12px;font-size:0.9em;margin-bottom:8px;">' . htmlspecialchars($m['kategori']) . '</span>';
-                echo '<div style="font-weight:bold;color:#222;margin:8px 0 6px 0;">Rp ' . number_format($m['harga'], 0, ',', '.') . '</div>';
-                echo '<p style="margin:0;color:#444;font-size:0.97em;">' . htmlspecialchars($m['deskripsi']) . '</p>';
-                echo '</div></div>';
-            }
-            echo '</div>';
-        }
-        ?>
+      <!-- Katalog Produk -->
+      <section id="daftar-menu">
+        <div class="row">
+            <?php if (!empty($mobil)): ?>
+                <?php foreach ($mobil as $item): ?>
+                    <div class="col">
+                        <div class="card">
+                            <img src="<?= htmlspecialchars('../../admin/img/' . $item['foto'], ENT_QUOTES, 'UTF-8') ?>"
+                                 class="card-img-top"
+                                 alt="<?= htmlspecialchars($item['merek'] . ' ' . $item['jenis'], ENT_QUOTES, 'UTF-8') ?>"
+                                 loading="lazy"/>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <?= htmlspecialchars($item['merek'], ENT_QUOTES, 'UTF-8') ?>
+                                </h5>
+                                <p class="card-text">
+                                    Jenis: <?= htmlspecialchars($item['jenis'], ENT_QUOTES, 'UTF-8') ?>
+                                </p>
+                                <p class="card-text">
+                                    Tahun: <?= htmlspecialchars($item['tahun'], ENT_QUOTES, 'UTF-8') ?>
+                                </p>
+                                <p class="card-text price">
+                                    Harga: Rp<?= number_format($item['harga'], 0, ',', '.') ?>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p class="text-center text-muted" style="width:100%;">Produk tidak tersedia.</p>
+            <?php endif; ?>
+        </div>
+      </section>
     </div>
-
-    <!-- awal footer -->
-    <footer style="background: linear-gradient(90deg, #005bea 70%, #00c6fb 100%); color:#fff; padding:40px 0 20px 0; margin-top:70px; box-shadow:0 -2px 24px #005bea33; border-radius:24px 24px 0 0;">
-        <div style="max-width:1100px; margin:0 auto; padding:0 20px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-start; gap:32px;">
-            <div style="flex:1; min-width:220px;">
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
                 <div style="font-size:1.5em; font-weight:700; letter-spacing:1px; margin-bottom:10px;">
                     <span style="color:#ffeb3b;">&#128663;</span> Dealer Mobil
                 </div>
-                <div style="font-size:1em; opacity:0.92;">
-                    Jl. Contoh No. 123, Jakarta<br>
-                    Telp: <a href="tel:02112345678" style="color:#fff; text-decoration:underline;">021-12345678</a>
+                <div class="footer-contact" style="font-size:1em; opacity:0.92;">
+                    Jl. HTS No. 123, Bandung<br>
+                    Telp: <a href="tel:02112345678">021-12345678</a>
                 </div>
-                <div style="margin-top:18px; font-size:1.1em;">
-                    <a href="https://instagram.com/" target="_blank" style="color:#fff; margin-right:12px; text-decoration:none;">
-                        <span style="font-size:1.3em;">&#x1F4F7;</span> Instagram
+                <div class="footer-social" style="margin-top:18px; font-size:1.1em;">
+                    <a href="https://instagram.com/" target="_blank">
+                        <i class="fab fa-instagram"></i> Instagram
                     </a>
-                    <a href="mailto:info@dealermobil.com" style="color:#fff; text-decoration:none;">
-                        <span style="font-size:1.3em;">&#x2709;&#xFE0F;</span> Email
+                    <a href="mailto:info@dealermobil.com">
+                        <i class="fa fa-envelope"></i> Email
                     </a>
                 </div>
             </div>
-            <div style="flex:1; min-width:180px;">
-                <div style="font-weight:600; font-size:1.1em; margin-bottom:10px;">Navigasi</div>
-                <ul style="list-style:none; padding:0; margin:0;">
-                    <li><a href="home.php" style="color:#fff; text-decoration:none; display:block; padding:4px 0;">Beranda</a></li>
-                    <li><a href="mobil.php" style="color:#fff; text-decoration:none; display:block; padding:4px 0;">Mobil</a></li>
-                    <li><a href="beli.php" style="color:#fff; text-decoration:none; display:block; padding:4px 0;">Beli</a></li>
-                    <li><a href="promo.php" style="color:#fff; text-decoration:none; display:block; padding:4px 0;">Promo</a></li>
+            <div class="footer-section">
+                <div class="footer-title">Navigasi</div>
+                <ul>
+                    <li><a href="home.php">Beranda</a></li>
+                    <li><a href="mobil.php">Mobil</a></li>
+                    <li><a href="beli.php">Beli</a></li>
+                    <li><a href="promo.php">Promo</a></li>
                 </ul>
             </div>
-            <div style="flex:1; min-width:220px;">
-                <div style="font-weight:600; font-size:1.1em; margin-bottom:10px;">Jam Operasional</div>
+            <div class="footer-section">
+                <div class="footer-title">Jam Operasional</div>
                 <div style="font-size:1em;">
                     Senin - Jumat: 08.00 - 18.00<br>
                     Sabtu: 09.00 - 15.00<br>
@@ -286,7 +320,5 @@
             </div>
         </div>
     </footer>
-    <!-- akhir footer -->
 </body>
-
 </html>

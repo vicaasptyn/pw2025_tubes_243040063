@@ -26,6 +26,20 @@ function create_mobil($data)
 
     return mysqli_affected_rows($db);
 }
+
+// fungsi untuk tambah pembeli
+function create_pembeli($data)
+{
+    global $db;
+    $Nama = $data['nama'];
+    $Kontak = $data['kontak'];
+    $Alamat = $data['alamat'];
+    $Jenis_Mobil = $data['jenis_mobil'];
+    $query = "INSERT INTO pembeli VALUES (null, '$Nama', '$Kontak', '$Alamat', '$Jenis_Mobil')";
+    mysqli_query($db, $query);
+
+    return mysqli_affected_rows($db);
+}
 // fungsi untuk ubah mobil
 function ubah_mobil($data)
 {
