@@ -7,7 +7,7 @@
         }
 
         nav {
-            background: #2c84ff;
+            background: #005bea;
             box-shadow: 0 2px 8px #0001;
             padding: 0;
         }
@@ -38,7 +38,7 @@
 
         .navbar-menu li a {
             text-decoration: none;
-            color: #005bea;
+            color: #ffffff;
             font-weight: 500;
             transition: color 0.2s;
             padding: 6px 12px;
